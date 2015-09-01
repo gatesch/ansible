@@ -1,0 +1,7 @@
+---
+  - name: test stuff
+    hosts: vagrant1
+    sudo: True
+    tasks: 
+    - name: Install Nginx
+      apt: pkg=nginx state=installed update_cache=true cache_valid_time=3600

@@ -1,0 +1,23 @@
+# Creates a new instance and attaches to a network and passes metadata to the instance
+- name: Create an instance
+  hosts: openstack
+  sudo: True
+  tasks:
+  - name: Check that the OpenStack controller exists
+    os_server: 
+      name: openstack
+      auth:
+          auth_url: https://openstack.example.com:35357/v2.0
+          username: admin
+          password: redhat12
+          project_name: admin
+      name: vm1
+      image: d5feaf7a-767a-4a93-ab7d-1888ac5627b3
+      key_name: openstack-key
+      flavor: 2
+      nics: 
+        - net-id: a4be1509-304d-4f52-adfc-3be4ee8509cf
+        - net-name: dmz
+      meta:
+        hostname: test1
+        group: default

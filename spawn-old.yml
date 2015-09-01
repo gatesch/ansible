@@ -1,0 +1,27 @@
+# Creates a new instance and attaches to a network and passes metadata to the instance
+- name: Create an instance
+  hosts: openstack
+  sudo: True
+  tasks:
+  - name: launch an instance
+    nova_compute:
+      state: present
+      login_username: admin
+      login_password: redhat12
+      login_tenant_name: admin
+      auth_url: http://openstack.example.com:5000/v2.0
+      name: vm1
+      image_id: d5feaf7a-767a-4a93-ab7d-1888ac5627b3
+      key_name: openstack-key
+      flavor_id: 2
+      security_groups: default
+      nics:
+        - net-id: a4be1509-304d-4f52-adfc-3be4ee8509cf
+      # auto_floating_ip: yes
+      floating_ips:
+        - 192.168.18.231
+      meta:
+        hostname: test1
+        group: default
+#    floating_ip_pools:
+#       - f918725c-3011-44c1-bbc9-92e66b11d460
